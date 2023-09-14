@@ -1,4 +1,3 @@
-print("hello new config")
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.g.cmp_enabled = 'true'
