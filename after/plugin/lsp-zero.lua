@@ -1,10 +1,9 @@
-local lsp_zero = require('lsp-zero')
+local lsp_zero = require('lsp-zero').preset({})
 
 lsp_zero.on_attach(function(client, bufnr)
-        -- see :help lsp-zero-keybindings
-        -- to learn the available actions
         lsp_zero.default_keymaps({ buffer = bufnr })
 end)
+lsp_zero.setup()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -24,8 +23,12 @@ local cmp_format = lsp_zero.cmp_format()
 cmp.setup({
         formatting = cmp_format,
         mapping = cmp.mapping.preset.insert({
-                -- scroll up and down the documentation window
+                ['<CR>'] = cmp.mapping.confirm({ select = false }),
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
         }),
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
 })

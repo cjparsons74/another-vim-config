@@ -9,6 +9,7 @@ branch='0.1.x', dependencies = {"nvim-lua/plenary.nvim", "nvim-telescope/telesco
     {"vim-test/vim-test"},
     {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     {"theprimeagen/harpoon"},
+    {'nvim-lualine/lualine.nvim'},
     {"mbbill/undotree"},
     {"tpope/vim-fugitive"},
     {   'VonHeikemen/lsp-zero.nvim',

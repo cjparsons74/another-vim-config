@@ -2,10 +2,12 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.g.cmp_enabled = 'true'
 require("lazy_bootstrap")
+require("plugins")
 
 require("lazy").setup("plugins")
 require('telescope').load_extension('fzy_native')
 require("keys")
+require("set")
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
