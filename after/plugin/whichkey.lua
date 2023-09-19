@@ -82,6 +82,7 @@ local mappings = {
     ["p"] = { "<cmd>Lazy<CR>", "Plugin Manager" }, -- Invoking plugin manager
     ["q"] = { "<cmd>wqall!<CR>", "Quit" }, -- Quit Neovim after saving the file
     ["w"] = { "<cmd>w!<CR>", "Save" }, -- Save current file
+    ["e"] = { "<cmd>Ex<CR>", "Explorer" },
 
 }
 

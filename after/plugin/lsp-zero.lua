@@ -1,5 +1,4 @@
 local lsp_zero = require('lsp-zero').preset({})
-
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
 end)
@@ -16,6 +15,21 @@ require('mason-lspconfig').setup({
         end,
     }
 })
+
+require('lspconfig').pyright.setup {
+    settings = {
+        pyright = {
+            disableLanguageServices = false,
+        },
+        python = {
+            analysis = {
+                diagnosticMode = "openFilesOnly",
+                typeCheckingMode = "basic",
+                diagnosticSeverityOverrides = {},
+            }
+        },
+    }
+}
 
 local cmp = require('cmp')
 local cmp_format = lsp_zero.cmp_format()
