@@ -29,3 +29,6 @@ vim.opt.signcolumn = "no"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+vim.opt.shada = "!,'5000,<500,s10,h"
+

@@ -11,6 +11,7 @@ branch='0.1.x', dependencies = {"nvim-lua/plenary.nvim", "nvim-telescope/telesco
     {"will133/vim-dirdiff"},
     {"vim-test/vim-test"},
     {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    {"nvim-treesitter/nvim-treesitter-context"},
     {"theprimeagen/harpoon"},
     {"mbbill/undotree"},
     {"tpope/vim-fugitive"},
