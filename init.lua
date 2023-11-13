@@ -35,6 +35,9 @@ let g:Todo_txt_prefix_creation_date=1
 " Needed for xdg-open to work
 let $DISPLAY = ':1'
 
+" I don't want delete to delete in normal mode
+nmap <Del> <Esc>
+
 nmap <LocalLeader>h 0/http<CR>"ayW:silent exec "!xdg-open\ '<C-R>a'"<CR>:redraw!<CR>
 
 augroup python_filetype
