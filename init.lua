@@ -1,11 +1,15 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.g.cmp_enabled = 'true'
+
+vim.g.loaded_netrw       = 1
+vim.g.loaded_netrwPlugin = 1
 require("lazy_bootstrap")
 require("plugins")
 
 require("lazy").setup("plugins")
 require('telescope').load_extension('fzy_native')
+-- require('telescope').load_extension('file_browser')
 require("keys")
 require("set")
 
@@ -25,6 +29,9 @@ set foldlevelstart=99
 " Allow gf to open a file that doesn't exist yet
 map gf :e <cfile><CR>
 nmap <C-W><C-F> :split <cfile><CR>
+
+" Alternate esc
+imap jk <Esc>
 
 " Vim test
 let test#python#pyunit#file_pattern = '\v((^|/)test.+\.py)|(.+_test\.py)' " the default is '\v(((^|/)test_.+)|_test)(spec)@<!\.rb$'
