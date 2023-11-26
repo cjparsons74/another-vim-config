@@ -16,6 +16,7 @@ return {
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{ "nvim-treesitter/nvim-treesitter-context" },
     { "nvim-tree/nvim-tree.lua"},
+    { "nvim-tree/nvim-web-devicons"},
 	{ "theprimeagen/harpoon" },
 	{ "mbbill/undotree" },
 	{ "tpope/vim-fugitive" },
