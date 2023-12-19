@@ -55,6 +55,11 @@ autocmd!
 au BufWritePost *.py silent !black %
 augroup END
 
+augroup sql_filetype
+autocmd!
+au BufWritePost *.sql silent !sqlfmt %
+augroup END
+
 augroup todo_filetype
         autocmd!
         au FileType todo setlocal nowrap  | nmap <LocalLeader>o 0/\|<CR>l"ay/\|<CR>:silent exec "!xdg-open\ https://pennyworth.atlassian.net/browse/<C-R>a"<CR>:redraw!<CR> au FileType todo nmap <LocalLeader>,i A +isp<ESC>0 | nmap <LocalLeader>,m A +management<ESC>0| nmap <LocalLeader>,w A +wings<ESC>0
