@@ -7,6 +7,11 @@ return {
 	},
 	{ "cjparsons74/todo.txt-vim", lazy = false },
 	{ "ggandor/leap.nvim" },
+    {
+        'akinsho/toggleterm.nvim',
+        tag = "*",
+        config = true
+    },
 	{ "fenetikm/falcon" },
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-commentary" },
