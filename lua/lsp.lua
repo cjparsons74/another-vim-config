@@ -43,8 +43,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				R = { vim.lsp.buf.rename, "Rename" },
 				c = { vim.lsp.buf.code_action, "Code action" },
 				r = { vim.lsp.buf.references, "References" },
-				-- Enabling this caused error message at startup, but conform has <leader>lf instead
-				-- f = { vim.lsp.buf.format({ async = true }), "Reformat" },
+				-- Disabled because of conform.nvim
+				-- f = {
+				-- 	function()
+				-- 		vim.lsp.buf.format({ async = true })
+				-- 	end,
+				-- 	"Reformat",
+				-- },
 			},
 		}, { prefix = "<leader>" })
 	end,
