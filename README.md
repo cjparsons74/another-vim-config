@@ -20,7 +20,6 @@ pip install pyright
 ```
 
 ## Bash
-### Bash language server
 https://github.com/bash-lsp/bash-language-server
 
 ```
@@ -28,3 +27,7 @@ npm i -g bash-language-server
 brew install shellcheck
 ```
 
+## Lua
+```
+brew install lua-language-server
+```
