@@ -1,10 +1,14 @@
 return  { "itchyny/lightline.vim",
-dependencies = {"falcon"}, 
+dependencies = {"fenetikm/falcon"},
+init = function()
+    vim.cmd [[
+    ]]
+    end,
 config = function()
-    -- vim.cmd [[
-    -- let g:falcon_lightline = 1
-    -- let g:lightline =  { 'colorscheme': 'falcon' }
-    -- ]]
+    vim.cmd [[
+    colorscheme falcon
+    let g:lightline =  { 'colorscheme': 'falcon' }
+    ]]
 end
 }
 
