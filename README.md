@@ -1,3 +1,11 @@
+# Clean before switching to this config
+```
+rm -Rf ~/.local/share/nvim/
+rm -Rf ~/.local/state/nvim/
+rm -R  ~/.cache/nvim/
+rm -R  ~/.cache/pyright-python/
+```
+
 # Language servers
 ## Management
 Configs for LSP client, handles attaching to servers per-language etc.

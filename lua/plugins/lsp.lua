@@ -1,12 +1,8 @@
 return {
 	"neovim/nvim-lspconfig",
+	dependencies = { "folke/neodev.nvim" },
 	config = function()
 		local lspconfig = require("lspconfig")
-		-- pip install ruff-lsp
-		-- pip install pyright
-		-- brew install lua-language-server
-		-- npm i -g bash-language-server
-		-- brew install shellcheck
 		lspconfig.ruff_lsp.setup({
 			init_options = {
 				settings = {
@@ -35,6 +31,8 @@ return {
 				},
 			},
 		})
+		require("neodev").setup({})
+
 		lspconfig.lua_ls.setup({})
 		lspconfig.bashls.setup({})
 	end,

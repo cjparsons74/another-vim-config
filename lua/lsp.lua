@@ -1,8 +1,17 @@
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+local wk = require("which-key")
+
+wk.register({
+	["[d"] = { vim.diagnostic.goto_prev, "Diagnostic prev" },
+	["]d"] = { vim.diagnostic.goto_next, "Diagnostic next" },
+})
+
+wk.register({
+	l = {
+		name = "lsp",
+		F = { vim.diagnostic.open_float, "Diagnostic float" },
+		l = { vim.diagnostic.setloclist, "Diagnostic list" },
+	},
+}, { prefix = "<leader>" })
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -11,26 +20,32 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-		-- Buffer local mappings.
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-		vim.keymap.set("n", "<space>wl", function()
-			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, opts)
-		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "<space>f", function()
-			vim.lsp.buf.format({ async = true })
-		end, opts)
+		wk.register({
+			["gd"] = { vim.lsp.buf.definition, "Goto definition" },
+			["gi"] = { vim.lsp.buf.implementation, "Goto implementation" },
+			["gD"] = { vim.lsp.buf.declaration, "Goto declaration" },
+			["K"] = { vim.lsp.buf.hover, "Hover" },
+		})
+		wk.register({
+			l = {
+				name = "lsp",
+				d = { vim.diagnostic.open_float, "Diagnostic float" },
+				s = { vim.lsp.buf.signature_help, "Signature help" },
+				a = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
+				x = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
+				l = {
+					function()
+						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+					end,
+					"List workspace folders",
+				},
+				D = { vim.lsp.buf.type_definition, "Type definition" },
+				R = { vim.lsp.buf.rename, "Rename" },
+				c = { vim.lsp.buf.code_action, "Code action" },
+				r = { vim.lsp.buf.references, "References" },
+				-- Enabling this caused error message at startup, but conform has <leader>lf instead
+				-- f = { vim.lsp.buf.format({ async = true }), "Reformat" },
+			},
+		}, { prefix = "<leader>" })
 	end,
 })
