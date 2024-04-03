@@ -1,7 +1,10 @@
 return {
-    "cjparsons74/todo.txt-vim",
-    config=function()
-vim.cmd [[
+	"cjparsons74/todo.txt-vim",
+	config = function()
+		vim.cmd([[
+let g:TodoTxtStripDoneItemPriority=1
+let g:Todo_txt_prefix_creation_date=1
+
 augroup todo_filetype
         autocmd!
         au FileType todo setlocal nowrap  | nmap <LocalLeader>o 0/\|<CR>l"ay/\|<CR>:silent exec "!xdg-open\ https://pennyworth.atlassian.net/browse/<C-R>a"<CR>:redraw!<CR> au FileType todo nmap <LocalLeader>,i A +isp<ESC>0 | nmap <LocalLeader>,m A +management<ESC>0| nmap <LocalLeader>,w A +wings<ESC>0
@@ -15,7 +18,6 @@ augroup todo_filetype
         "au! BufWritePost ~/todo.txt !~/Todo/todo.sh
     ab ~d ~/Documents/<C-r>=strftime("%F%-H%I%M")<CR>.txt
 augroup END
-]]
-end
-
+]])
+	end,
 }
