@@ -2,6 +2,7 @@ return {
 	"tpope/vim-fugitive",
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	{ "tpope/vim-commentary" },
+	{ "fladson/vim-kitty" },
 	{ "will133/vim-dirdiff" },
 	{ "rmagatti/auto-session", opts = {} },
 	{ "mbbill/undotree" },
