@@ -34,3 +34,6 @@ vim.opt.shada = "!,'5000,<500,s10,h"
 
 -- Prevent passing mouse to vim when ssh
 vim.opt.mouse = ""
+
+-- Don't need "Insert" in below airline because airline has it
+vim.opt.showmode = false

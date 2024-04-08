@@ -1,14 +1,11 @@
-return  { "itchyny/lightline.vim",
-dependencies = {"fenetikm/falcon"},
-init = function()
-    vim.cmd [[
-    ]]
-    end,
-config = function()
-    vim.cmd [[
+return {
+	"cjparsons74/lightline.vim",
+	dependencies = { "fenetikm/falcon" },
+	-- dir = "~/Projects/lightline.vim",
+	config = function()
+		vim.cmd([[
+    let g:lightline =  { 'colorscheme': 'falconish' }
     colorscheme falcon
-    let g:lightline =  { 'colorscheme': 'falcon' }
-    ]]
-end
+    ]])
+	end,
 }
-
