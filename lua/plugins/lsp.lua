@@ -3,19 +3,19 @@ return {
 	dependencies = { "folke/neodev.nvim" },
 	config = function()
 		local lspconfig = require("lspconfig")
-		lspconfig.ruff_lsp.setup({
+		lspconfig.ruff.setup({
 			init_options = {
 				settings = {
 					-- Any extra CLI arguments for `ruff` go here.
-					args = {},
+					args = { "--preview" },
 				},
 			},
-			on_attach = function(client, bufnr)
-				if client.name == "ruff_lsp" then
-					-- Disable hover in favor of Pyright
-					client.server_capabilities.hoverProvider = false
-				end
-			end,
+			-- on_attach = function(client, bufnr)
+			-- 	if client.name == "ruff_lsp" then
+			-- 		-- Disable hover in favor of Pyright
+			-- 		client.server_capabilities.hoverProvider = false
+			-- 	end
+			-- end,
 		})
 		lspconfig.pyright.setup({
 			settings = {
@@ -26,7 +26,7 @@ return {
 				python = {
 					analysis = {
 						-- Ignore all files for analysis to exclusively use Ruff for linting
-						ignore = { "*" },
+						-- ignore = { "*" },
 					},
 				},
 			},
@@ -35,5 +35,6 @@ return {
 
 		lspconfig.lua_ls.setup({})
 		lspconfig.bashls.setup({})
+		require("lspconfig").terraformls.setup({})
 	end,
 }

@@ -13,3 +13,20 @@ wk.register({
 		q = { ":wqa<CR>", "Writeall quit" },
 	},
 }, { prefix = "<leader>" })
+
+vim.cmd([[
+    nnoremap Q :call ToggleColmak()<CR>
+    let g:colmak_toggle = 1
+
+    function! ToggleColmak()
+      if g:colmak_toggle == 1
+          nnoremap n j
+          nnoremap e k
+          nnoremap k n
+     else
+          nunmap n j
+          nunmap e k
+          nunmap k n
+    endif
+    endfunction
+    ]])
