@@ -11,13 +11,14 @@ augroup todo_filetype
         au FileType todo nmap <LocalLeader>q yyp/[A-Za-z]\{2}<CR>i(partial) <Esc><C-L>0cWx <C-R>=strftime("%Y-%m-%d")<CR><Esc>k:s/([ABC])/(C)/<CR>0/\d\{4}<CR>cW<C-R>=strftime("%Y-%m-%d")<CR><Esc>
 
         " First sort is needed in case a completed item 'x' causes break of Filter early
-        au BufWritePre ~/todo.txt sort|call todo#FilterPastFuture()|sort
-        au BufRead ~/todo.txt call todo#FilterPastFuture()|sort
+        au BufWritePre ~/Todo/todo.txt sort|call todo#FilterPastFuture()|sort
+        au BufRead ~/Todo/todo.txt call todo#FilterPastFuture()|sort
 
-        au! BufWritePost ~/todo.txt !$HOME/Todo/todo.sh jira
+        au! BufWritePost ~/Todo/todo.txt !$HOME/Todo/todo.sh jira
         "au! BufWritePost ~/todo.txt !~/Todo/todo.sh
     ab ~d ~/Documents/<C-r>=strftime("%F%-H%I%M")<CR>.txt
 augroup END
 ]])
 	end,
 }
+

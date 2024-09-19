@@ -5,9 +5,13 @@ vim.keymap.set("n", "<Del>", "<Esc>", { desc = "Do not delete in normal mode" })
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Alternate Esc" })
 vim.keymap.set("n", "gf", ":e <cfile><CR>", { desc = "Open a file that does not exist" })
 vim.keymap.set("n", "<C-W><C-F>", ":split <cfile><CR>", { desc = "Split a file that does not exist" })
+vim.cmd([[
+    nmap <LocalLeader>h 0/http<CR>"ayW:silent exec "!xdg-open\ '<C-R>a'"<CR>:redraw!<CR>
+]])
 
 local wk = require("which-key")
 wk.register({
+	e = { ":cd %:h <CR>:vert split .<CR>", "explore" },
 	q = {
 		name = "session",
 		q = { ":wqa<CR>", "Writeall quit" },

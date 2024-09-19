@@ -34,6 +34,7 @@ return {
 		require("neodev").setup({})
 
 		lspconfig.lua_ls.setup({})
+		lspconfig.gopls.setup({})
 		lspconfig.bashls.setup({})
 		require("lspconfig").terraformls.setup({})
 	end,
