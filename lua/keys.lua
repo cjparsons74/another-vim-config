@@ -25,12 +25,18 @@ vim.cmd([[
     function! ToggleColmak()
       if g:colmak_toggle == 1
           nnoremap n j
+          vnoremap n j
           nnoremap e k
+          vnoremap e k
           nnoremap k n
+          vnoremap k n
      else
           nunmap n j
           nunmap e k
           nunmap k n
+          vunmap n j
+          vunmap e k
+          vunmap k n
     endif
     endfunction
     ]])
