@@ -3,25 +3,25 @@ return {
 	dependencies = { "folke/neodev.nvim" },
 	config = function()
 		local lspconfig = require("lspconfig")
-		lspconfig.ruff.setup({
-			init_options = {
-				settings = {
-					-- Any extra CLI arguments for `ruff` go here.
-					args = { "--preview" },
-				},
-			},
-			-- on_attach = function(client, bufnr)
-			-- 	if client.name == "ruff_lsp" then
-			-- 		-- Disable hover in favor of Pyright
-			-- 		client.server_capabilities.hoverProvider = false
-			-- 	end
-			-- end,
-		})
+		-- lspconfig.ruff.setup({
+		-- 	init_options = {
+		-- 		settings = {
+		-- 			-- Any extra CLI arguments for `ruff` go here.
+		-- 			args = { "--preview" },
+		-- 		},
+		-- 	},
+		-- on_attach = function(client, bufnr)
+		-- 	if client.name == "ruff_lsp" then
+		-- 		-- Disable hover in favor of Pyright
+		-- 		client.server_capabilities.hoverProvider = false
+		-- 	end
+		-- end,
+		-- })
 		lspconfig.pyright.setup({
 			settings = {
 				pyright = {
-					-- Using Ruff's import organizer
-					disableOrganizeImports = true,
+					-- -- Using Ruff's import organizer
+					-- disableOrganizeImports = true,
 				},
 				python = {
 					analysis = {
