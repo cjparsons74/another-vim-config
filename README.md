@@ -39,3 +39,15 @@ brew install shellcheck
 ```
 brew install lua-language-server
 ```
+
+# Use a pyproject.toml
+
+Put a pyproject.toml in the root of the project to stop pyright searching
+your whole home directory for workspace files.
+
+Basic content:
+
+```
+[project]
+name = "my-project"
+```
