@@ -37,3 +37,9 @@ vim.opt.mouse = ""
 
 -- Don't need "Insert" in below airline because airline has it
 vim.opt.showmode = false
+vim.cmd([[
+augroup asciidoc_filetype
+        autocmd!
+        au FileType asciidoc set formatoptions=tcqav | set textwidth=100
+augroup END
+]])
