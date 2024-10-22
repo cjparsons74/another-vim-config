@@ -28,6 +28,8 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "no"
 vim.opt.isfname:append("@-@")
 
+vim.opt.spellfile = os.getenv("HOME") .. "/.vim/spell/en.utf-8.add"
+vim.opt.spelllang = "en_gb"
 vim.opt.updatetime = 50
 
 vim.opt.shada = "!,'5000,<500,s10,h"
@@ -40,6 +42,6 @@ vim.opt.showmode = false
 vim.cmd([[
 augroup asciidoc_filetype
         autocmd!
-        au FileType asciidoc set formatoptions=tcqav | set textwidth=100
+        au FileType asciidoc set spell | set formatoptions=tcqv | set textwidth=100
 augroup END
 ]])
