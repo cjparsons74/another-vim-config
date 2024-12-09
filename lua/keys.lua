@@ -9,34 +9,5 @@ vim.cmd([[
     nmap <LocalLeader>h 0/http<CR>"ayW:silent exec "!xdg-open\ '<C-R>a'"<CR>:redraw!<CR>
 ]])
 
-local wk = require("which-key")
-wk.register({
-	e = { ":cd %:h <CR>:vert split .<CR>", "explore" },
-	q = {
-		name = "session",
-		q = { ":wqa<CR>", "Writeall quit" },
-	},
-}, { prefix = "<leader>" })
-
-vim.cmd([[
-    nnoremap Q :call ToggleColmak()<CR>
-    let g:colmak_toggle = 1
-
-    function! ToggleColmak()
-      if g:colmak_toggle == 1
-          nnoremap n j
-          vnoremap n j
-          nnoremap e k
-          vnoremap e k
-          nnoremap k n
-          vnoremap k n
-     else
-          nunmap n j
-          nunmap e k
-          nunmap k n
-          vunmap n j
-          vunmap e k
-          vunmap k n
-    endif
-    endfunction
-    ]])
+vim.keymap.set("n", "<Leader>e", ":cd %:h<CR>:lua MiniFiles.open()<CR>", { desc = "Explore" })
+vim.keymap.set("n", "<Leader>qq", ":wqa<CR>", { desc = "Write and quit" })

@@ -1,27 +1,34 @@
 return {
-	"nvim-telescope/telescope.nvim",
-	name = "telescope",
+    "nvim-telescope/telescope.nvim",
+    name = "telescope",
 
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"BurntSushi/ripgrep",
-		"nvim-telescope/telescope-fzf-native.nvim",
-	},
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "BurntSushi/ripgrep",
+        "nvim-telescope/telescope-fzf-native.nvim",
+    },
 
-	config = function()
-		require("telescope").setup({ live_grep_args = { auto_quoting = false } })
-		require("telescope").load_extension("fzf")
-		local wk = require("which-key")
-
-		wk.register({
-			f = {
-				name = "file",
-				f = { "<cmd>Telescope find_files<cr>", "Find File" },
-				w = { "<cmd>Telescope live_grep<cr>", "Find Word" },
-				o = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = true },
-				h = { "<cmd>Telescope command_history<cr>", "Command History" },
-				t = { "<cmd>Telescope treesitter<cr>", "Treesitter names and variables" },
-			},
-		}, { prefix = "<leader>" })
-	end,
+    config = function()
+        require("telescope").setup({
+            defaults = {
+                path_display = {
+                    filename_first = {
+                        reverse_directories = true
+                    }
+                },
+            },
+            live_grep_args = { auto_quoting = false },
+        })
+        require("telescope").load_extension("fzf")
+    end,
+    keys = {
+        { '<Leader>fb', '<cmd>Telescope buffers<CR>',                   desc = 'Colour schemes' },
+        { '<Leader>fc', '<cmd>Telescope colorscheme<CR>',               desc = 'Colour schemes' },
+        { '<Leader>ff', '<cmd>Telescope find_files<CR>',                desc = 'Find files' },
+        { '<Leader>fg', '<cmd>Telescope spell_suggest<CR>',             desc = 'Spellings' },
+        { '<Leader>fh', '<cmd>Telescope command_history<CR>',           desc = 'Command history' },
+        { '<Leader>fo', '<cmd>Telescope oldfiles<CR>',                  desc = 'Recent files' },
+        { '<Leader>fs', '<cmd>Telescope current_buffer_fuzzy_find<CR>', desc = 'Current buffer' },
+        { '<Leader>fw', '<cmd>Telescope live_grep<CR>',                 desc = 'Word' },
+    },
 }

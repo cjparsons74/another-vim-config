@@ -1,9 +1,9 @@
 return {
     "tpope/vim-fugitive",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, { "tpope/vim-commentary" },
+
     { "fladson/vim-kitty" },
 
-    { "rmagatti/auto-session",                    opts = {} },
+    { "rmagatti/auto-session", opts = {} },
     { "mbbill/undotree" },
     {
         "folke/flash.nvim",
@@ -48,52 +48,93 @@ return {
         end,
     },
     { "chrisbra/recover.vim" },
-    { "mfussenegger/nvim-dap" },
-    { "leoluz/nvim-dap-go",        config = function() require('dap-go').setup() end },
+    -- { "mfussenegger/nvim-dap" },
+    -- { "leoluz/nvim-dap-go",        config = function() require('dap-go').setup() end },
     { "nvim-neotest/nvim-nio" },
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     config = function()
+    --         local dap, dapui = require('dap'), require('dapui')
+    --         local dapgo = require('dap-go')
+    --         dapui.setup()
+    --         dapgo.setup()
+    --         dap.listeners.before.attach.dapui_config = function()
+    --             dapui.open()
+    --         end
+    --         dap.listeners.before.launch.dapui_config = function()
+    --             dapui.open()
+    --         end
+    --
+    --
+    --         dap.listeners.before.event_terminated.dapui_config = function()
+    --             dapui.close()
+    --         end
+    --         dap.listeners.before.event_exited.dapui_config = function()
+    --             dapui.close()
+    --         end
+    --
+    --
+    --         vim.keymap.set('n', '<Leader>dc', function() require('dap').continue() end)
+    --         vim.keymap.set('n', '<Leader>ds', function() require('dap').step_over() end)
+    --         vim.keymap.set('n', '<Leader>di', function() require('dap').step_into() end)
+    --         vim.keymap.set('n', '<Leader>do', function() require('dap').step_out() end)
+    --         vim.keymap.set('n', '<Leader>db', function()
+    --             require('dap').toggle_breakpoint()
+    --         end)
+    --         vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+    --         vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+    --
+    --         vim.keymap.set('n', '<Leader>dw', function() dapui.open() end)
+    --         vim.keymap.set('n', '<Leader>dW', function() dapui.close() end)
+    --     end
+    -- },
+    { 'will133/vim-dirdiff' },
     {
-        "rcarriga/nvim-dap-ui",
+        'tigion/nvim-asciidoc-preview',
+        ft = { 'asciidoc' },
+        build = 'cd server && npm install',
+        opts = {
+            server = {
+                converter = 'js'
+            },
+            preview = {
+                position = 'current',
+            },
+        },
+    },
+    {
+        'echasnovski/mini.files',
+        version = false,
         config = function()
-            local dap, dapui = require('dap'), require('dapui')
-            local dapgo = require('dap-go')
-            dapui.setup()
-            dapgo.setup()
-            dap.listeners.before.attach.dapui_config = function()
-                dapui.open()
-            end
-            dap.listeners.before.launch.dapui_config = function()
-                dapui.open()
-            end
+            require('mini.icons').setup()
+            require('mini.files').setup()
+        end,
+        dependencies = {
+            { 'echasnovski/mini.icons', version = false },
+        },
 
 
-            -- Include the next few lines until the comment only if you feel you need it
-            dap.listeners.before.event_terminated.dapui_config = function()
-                dapui.close()
-            end
-            dap.listeners.before.event_exited.dapui_config = function()
-                dapui.close()
-            end
-            -- Include everything after this
-
-
-            vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-            vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-            vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-            vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
-            vim.keymap.set('n', '<Leader>q', function()
-                require('dap').toggle_breakpoint()
-            end)
-            vim.keymap.set('n', '<Leader>Q', function()
-                require('dap').set_breakpoint()
-            end)
-            vim.keymap.set('n', '<Leader>lp', function()
-                require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-            end)
-            vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
-            vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
-
-            vim.keymap.set('n', '<Leader>w', function() dapui.open() end)
-            vim.keymap.set('n', '<Leader>W', function() dapui.close() end)
+    },
+    {
+        dir = "~/Documents/eof-eol-marker.vim",
+        name = "eof-marker",
+        config = function()
+            require('eof-marker').setup()
         end
     },
+    {
+        "cuducos/yaml.nvim",
+        ft = { "yaml" },
+        config = function()
+            YAML_PLUGIN = require('yaml_nvim')
+            YAML_PLUGIN.setup()
+        end,
+        keys = {
+            { '<Leader>yk', mode = { "n" }, function() YAML_PLUGIN.yank_key("+") end, desc = "YAML key to +" },
+            { '<Leader>yy', mode = { "n" }, function() YAML_PLUGIN.yank_all("+") end, desc = "Key & value to +" },
+            { '<Leader>yq', mode = { "n" }, function() YAML_PLUGIN.quickfix() end,    desc = "YAML to quickfix" },
+            { '<Leader>yt', mode = { "n" }, function() YAML_PLUGIN.telescope() end,   desc = "YAML to telescope" },
+        }
+    },
+    -- { "cjparsons74/eof-eol-marker.vim", config = function() require("eof-marker").setup() end },
 }

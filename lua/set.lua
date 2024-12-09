@@ -1,6 +1,6 @@
 vim.opt.guicursor = ""
 
-vim.opt.nu = false
+
 vim.opt.relativenumber = false
 
 vim.opt.tabstop = 4
@@ -42,6 +42,6 @@ vim.opt.showmode = false
 vim.cmd([[
 augroup asciidoc_filetype
         autocmd!
-        au FileType asciidoc set spell | set formatoptions=tcqv | set textwidth=100
+        au FileType asciidoc,text set spell | set formatoptions=tcqv | set textwidth=100 | set formatexpr=
 augroup END
 ]])
