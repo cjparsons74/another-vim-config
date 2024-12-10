@@ -5,9 +5,14 @@ return {
         vim.o.timeout = true
         vim.o.timeoutlen = 300
     end,
-    opts = {
-        defaults = {
-            { '<Leader>f', group = "Find" },
-        }
-    }
+    config = function()
+        local wk = require("which-key")
+        wk.setup({})
+        wk.add({
+            { "<leader>f", group = "Find" },
+            { "<leader>l", group = "Lsp" },
+            { "<leader>q", group = "Operations" },
+            { "<leader>y", group = "Yaml" },
+        })
+    end
 }
