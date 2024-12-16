@@ -44,4 +44,8 @@ augroup asciidoc_filetype
         autocmd!
         au FileType asciidoc,text set spell | set formatoptions=tcqv | set textwidth=100 | set formatexpr=
 augroup END
+
+set diffopt+=context:1
+"au DiffUpdated * colorscheme murphy
+au BufEnter * if &diff | set wrap | set nospell | endif
 ]])

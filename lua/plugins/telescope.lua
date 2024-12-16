@@ -18,11 +18,12 @@ return {
                 },
             },
             live_grep_args = { auto_quoting = false },
+            pickers = { colorscheme = { enable_preview = true } },
         })
         require("telescope").load_extension("fzf")
     end,
     keys = {
-        { '<Leader>fb', '<cmd>Telescope buffers<CR>',                   desc = 'Colour schemes' },
+        { '<Leader>fb', '<cmd>Telescope buffers<CR>',                   desc = 'Buffers' },
         { '<Leader>fc', '<cmd>Telescope colorscheme<CR>',               desc = 'Colour schemes' },
         { '<Leader>ff', '<cmd>Telescope find_files<CR>',                desc = 'Find files' },
         { '<Leader>fg', '<cmd>Telescope spell_suggest<CR>',             desc = 'Spellings' },

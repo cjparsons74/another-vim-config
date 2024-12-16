@@ -1,6 +1,6 @@
 return {
     "cjparsons74/lightline.vim",
-    dependencies = { "fenetikm/falcon" },
+    dependencies = { "cjparsons74/falcon" },
     -- dir = "~/Projects/lightline.vim",
     config = function()
         vim.cmd([[

@@ -11,3 +11,4 @@ vim.cmd([[
 
 vim.keymap.set("n", "<Leader>e", ":cd %:h<CR>:lua MiniFiles.open()<CR>", { desc = "Explore" })
 vim.keymap.set("n", "<Leader>qq", ":wqa<CR>", { desc = "Write and quit" })
+vim.keymap.set("n", "<Leader>qq", ":wqa<CR>", { desc = "Write and quit" })
