@@ -11,8 +11,8 @@ return {
         opts = {},
         -- stylua: ignore
         keys = {
-            { "gs",    mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-            { "gS",    mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+            { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+            { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
             { "gr",    mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
             { "gR",    mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
@@ -102,13 +102,13 @@ return {
             },
         },
     },
-    {
-        dir = "~/Documents/eof-eol-marker.vim",
-        name = "eof-marker",
-        config = function()
-            require('eof-marker').setup()
-        end
-    },
+    -- {
+    --     dir = "~/Documents/eof-eol-marker.vim",
+    --     name = "eof-marker",
+    --     config = function()
+    --         require('eof-marker').setup()
+    --     end
+    -- },
     {
         "cuducos/yaml.nvim",
         ft = { "yaml" },
