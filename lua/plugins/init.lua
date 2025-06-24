@@ -6,6 +6,15 @@ return {
     { "rmagatti/auto-session", opts = {} },
     { "mbbill/undotree" },
     {
+        "ziontee113/icon-picker.nvim",
+        dependencies = { "stevearc/dressing.nvim" }, -- optional, for nicer UI
+        config = function()
+            require("icon-picker").setup({
+                disable_legacy_commands = true
+            })
+        end
+    },
+    {
         "folke/flash.nvim",
         event = "VeryLazy",
         opts = {},
@@ -22,6 +31,7 @@ return {
     {
         "hrsh7th/cmp-nvim-lsp",
     },
+
     {
         "hrsh7th/nvim-cmp",
         config = function()
@@ -37,6 +47,7 @@ return {
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "buffer" },
+                    { name = "emoji" },
                 }),
             })
             -- Set up lspconfig.
@@ -45,6 +56,15 @@ return {
             require("lspconfig").pyright.setup({
                 capabilities = capabilities,
             })
+        end,
+    },
+    {
+        "hrsh7th/cmp-emoji",
+        -- optional: only load when cmp is loaded
+        dependencies = { "hrsh7th/nvim-cmp" },
+        config = function()
+            -- This just ensures it's registered as a source,
+            -- you still need to add it in your cmp setup!
         end,
     },
     { "chrisbra/recover.vim" },
