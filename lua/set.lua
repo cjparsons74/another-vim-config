@@ -48,4 +48,24 @@ augroup END
 set diffopt+=context:1
 "au DiffUpdated * colorscheme murphy
 au BufEnter * if &diff | set wrap | set nospell | endif
+
+augroup TerraformQuickfix
+  autocmd!
+  au Filetype terraform,terraform-vars setlocal efm=%EError:\ %m,%Z%.%#\ on\ %f\ line\ %l\\,%m,%C\ \ with\ %o\\,,%C%.%# | setlocal makeprg=TF_CLI_ARGS=-no-color\ terraform\ apply\ -auto-approve\ 2>&1
+augroup END
+
+au QuickFixCmdPost [^l]* cwindow
 ]])
+
+-- Special mapping for gx that allows shell commands sh://echo Hello from Neovim!
+vim.keymap.set('n', 'gx', function()
+    local line = vim.api.nvim_get_current_line()
+    local cmd = line:match('sh://(.*)')
+    if cmd then
+        vim.cmd('!' .. cmd)
+    else
+        -- fallback: open URLs or files like usual
+        local fallback = vim.fn.expand('<cfile>')
+        vim.cmd('!xdg-open ' .. fallback)
+    end
+end, { noremap = true, silent = true })

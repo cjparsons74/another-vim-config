@@ -19,6 +19,9 @@ return {
             sh = { "shfmt" },
             lua = { "stylua" },
             python = { "ruff_format" },
+            terraform = { "terraform_fmt" },
+            tf = { "terraform_fmt" },
+            tfvars = { "terraform_fmt" },
         },
         -- Set up format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },
