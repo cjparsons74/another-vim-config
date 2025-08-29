@@ -34,7 +34,23 @@ return {
         require("neodev").setup({})
 
         lspconfig.lua_ls.setup({})
-        lspconfig.gopls.setup({})
+        lspconfig.gopls.setup({
+            settings = {
+                gopls = {
+                    directoryFilters = { '-plz-out' },
+                    linksInHover = false,
+                    analyses = {
+                        unusedparams = true,
+                    },
+                    usePlaceholders = false,
+                    semanticTokens = true,
+                    codelenses = {
+                        gc_details = true,
+                    },
+                    staticcheck = true,
+                },
+            },
+        })
         lspconfig.bashls.setup({})
         lspconfig.quick_lint_js.setup({})
         require("lspconfig").terraformls.setup({})

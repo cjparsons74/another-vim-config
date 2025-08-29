@@ -31,5 +31,6 @@ return {
         { '<Leader>fo', '<cmd>Telescope oldfiles<CR>',                  desc = 'Recent files' },
         { '<Leader>fs', '<cmd>Telescope current_buffer_fuzzy_find<CR>', desc = 'Current buffer' },
         { '<Leader>fw', '<cmd>Telescope live_grep<CR>',                 desc = 'Word' },
+        { '<Leader>fW', '<cmd>Telescope grep_string<CR>',               desc = 'Word under cursor' },
     },
 }

@@ -113,15 +113,19 @@ return {
         'tigion/nvim-asciidoc-preview',
         ft = { 'asciidoc' },
         build = 'cd server && npm install',
-        opts = {
-            server = {
-                converter = 'js'
-            },
-            preview = {
-                position = 'current',
-            },
-        },
     },
+    -- {
+    --     'tigion/nvim-asciidoc-preview',
+    --     ft = { 'asciidoc' },
+    --     build = 'cd server && npm install',
+    --     opts = {
+    --         server = {
+    --         },
+    --         preview = {
+    --             position = 'browser',
+    --         },
+    --     },
+    -- },
     -- {
     --     dir = "~/Documents/eof-eol-marker.vim",
     --     name = "eof-marker",
@@ -148,6 +152,12 @@ return {
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
         config = function()
             require("nvim-surround").setup({
+                keymaps = {
+                    normal = "yz",
+                    delete = "dz",
+                    change = "cz",
+                    change_line = "cZ",
+                }
             })
         end
     }
