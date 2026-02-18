@@ -1,5 +1,5 @@
-require("options")
-
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 require("lazy_bootstrap")
 
 require("lazy").setup("plugins")

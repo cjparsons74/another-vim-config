@@ -1,6 +1,3 @@
-vim.opt.guicursor = ""
-
-
 vim.opt.relativenumber = false
 
 vim.opt.tabstop = 4
@@ -47,7 +44,7 @@ augroup END
 
 set diffopt+=context:1
 "au DiffUpdated * colorscheme murphy
-au BufEnter * if &diff | set wrap | set nospell | endif
+au BufEnter * if &diff | set nospell | endif
 
 augroup TerraformQuickfix
   autocmd!
@@ -69,3 +66,14 @@ vim.keymap.set('n', 'gx', function()
         vim.cmd('!xdg-open ' .. fallback)
     end
 end, { noremap = true, silent = true })
+
+-- Jira writing mode (enable)
+-- Jira writing mode (enable recommended settings for drafting text)
+vim.keymap.set("n", "<leader>jw", function()
+    vim.opt.wrap = true
+    vim.opt.linebreak = true
+    vim.opt.breakindent = true
+    vim.opt.textwidth = 0
+    vim.opt.formatoptions:remove("t")
+    print("Jira writing mode enabled")
+end, { desc = "Enable Jira writing mode" })
