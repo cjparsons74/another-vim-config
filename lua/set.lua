@@ -9,7 +9,17 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+local data_dir = vim.fn.stdpath("data")
+
+-- On Windows: ~/AppData/Local/nvim-data/undo
+-- On Linux:   ~/.local/share/nvim/undo
+vim.opt.undodir = data_dir .. "/undo"
+vim.opt.spellfile = data_dir .. "/spell/en.utf-8.add"
+
+-- Create the directories if they don't exist
+if vim.fn.isdirectory(vim.opt.undodir:get()[1]) == 0 then
+    vim.fn.mkdir(vim.opt.undodir:get()[1], "p")
+end
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
@@ -25,7 +35,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "no"
 vim.opt.isfname:append("@-@")
 
-vim.opt.spellfile = os.getenv("HOME") .. "/.vim/spell/en.utf-8.add"
+vim.opt.undofile = true
 vim.opt.spelllang = "en_gb"
 vim.opt.updatetime = 50
 

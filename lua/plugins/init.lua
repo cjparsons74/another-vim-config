@@ -1,10 +1,9 @@
 return {
 	"tpope/vim-fugitive",
 
-	{ "fladson/vim-kitty" },
+    { "fladson/vim-kitty", enabled = not _G.is_windows },
 
-	{ "rmagatti/auto-session", opts = {} },
-	{ "mbbill/undotree" },
+    { "rmagatti/auto-session", opts = {}, enabled = not _G.is_windows},
 	{
 		"ziontee113/icon-picker.nvim",
 		dependencies = { "stevearc/dressing.nvim" }, -- optional, for nicer UI
@@ -14,10 +13,11 @@ return {
 			})
 		end,
 	},
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {},
+    { "mbbill/undotree" },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
         -- stylua: ignore
         keys = {
             { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
@@ -26,7 +26,7 @@ return {
             { "gR",    mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
-	},
+    },
 	{ "gpanders/editorconfig.nvim" },
 	{
 		"hrsh7th/cmp-nvim-lsp",
