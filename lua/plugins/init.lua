@@ -1,9 +1,9 @@
 return {
 	"tpope/vim-fugitive",
 
-    { "fladson/vim-kitty", enabled = not _G.is_windows },
+	{ "fladson/vim-kitty", enabled = not _G.is_windows },
 
-    { "rmagatti/auto-session", opts = {}, enabled = not _G.is_windows},
+	{ "rmagatti/auto-session", opts = {}, enabled = not _G.is_windows },
 	{
 		"ziontee113/icon-picker.nvim",
 		dependencies = { "stevearc/dressing.nvim" }, -- optional, for nicer UI
@@ -13,11 +13,11 @@ return {
 			})
 		end,
 	},
-    { "mbbill/undotree" },
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {},
+	{ "mbbill/undotree" },
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {},
         -- stylua: ignore
         keys = {
             { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
@@ -26,7 +26,7 @@ return {
             { "gR",    mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
-    },
+	},
 	{ "gpanders/editorconfig.nvim" },
 	{
 		"hrsh7th/cmp-nvim-lsp",
@@ -50,11 +50,13 @@ return {
 					{ name = "emoji" },
 				}),
 			})
-			-- Set up lspconfig.
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 			require("lspconfig").pyright.setup({
 				capabilities = capabilities,
+			})
+			require("lspconfig").html.setup({
+				capabilities = capabilities,
+				filetypes = { "html", "templ", "javascriptreact", "typescriptreact" },
 			})
 		end,
 	},
@@ -177,16 +179,9 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		version = "*",
 		config = function()
-			require("nvim-surround").setup({
-				keymaps = {
-					normal = "yz",
-					delete = "dz",
-					change = "cz",
-					change_line = "cZ",
-				},
-			})
+			require("nvim-surround").setup({ move_cursor = false })
 		end,
 	},
 	{
@@ -253,6 +248,34 @@ return {
 		config = function()
 			vim.opt.termguicolors = true
 			vim.cmd([[colorscheme falcon]])
+		end,
+	},
+	{
+		-- used for linters that are not language servers i.e. cmdline tools
+		"mfussenegger/nvim-lint",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local lint = require("lint")
+
+			-- Define which linters to run for which filetypes
+			lint.linters_by_ft = {
+				html = { "djlint" },
+				django = { "djlint" },
+				jinja = { "djlint" },
+			}
+			lint.linters.djlint.args = {
+				"--lint",
+				"--searchpath",
+				vim.fn.getcwd(), -- Forces it to look in your current Neovim directory
+				"-",
+			}
+
+			-- Create an autocmd to trigger linting
+			vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+				callback = function()
+					lint.try_lint()
+				end,
+			})
 		end,
 	},
 	-- { "cjparsons74/eof-eol-marker.vim", config = function() require("eof-marker").setup() end },
