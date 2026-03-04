@@ -19,7 +19,7 @@ return {
 			sh = { "shfmt" },
 			html = { "djlint" },
 			lua = { "stylua" },
-			python = { "ruff_format" },
+			python = { "ruff_fix", "ruff_organize_imports", "ruff_format" },
 			terraform = { "terraform_fmt" },
 			tf = { "terraform_fmt" },
 			tfvars = { "terraform_fmt" },

@@ -18,6 +18,12 @@ return {
 		-- end,
 		-- })
 		lspconfig.pyright.setup({
+			root_dir = require("lspconfig.util").root_pattern(
+				".git",
+				"pyproject.toml",
+				"setup.py",
+				"pyrightconfig.json"
+			),
 			settings = {
 				pyright = {
 					-- -- Using Ruff's import organizer
