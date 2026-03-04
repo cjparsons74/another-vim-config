@@ -18,7 +18,7 @@ vim.opt.spellfile = data_dir .. "/spell/en.utf-8.add"
 
 -- Create the directories if they don't exist
 if vim.fn.isdirectory(vim.opt.undodir:get()[1]) == 0 then
-    vim.fn.mkdir(vim.opt.undodir:get()[1], "p")
+	vim.fn.mkdir(vim.opt.undodir:get()[1], "p")
 end
 vim.opt.undofile = true
 
@@ -49,7 +49,7 @@ vim.opt.showmode = false
 vim.cmd([[
 augroup asciidoc_filetype
         autocmd!
-        au FileType asciidoc,text set spell | set formatoptions=tcqv | set textwidth=100 | set formatexpr=
+        au FileType markdown,asciidoc,text set spell | set formatoptions=tcqv | set textwidth=100 | set formatexpr=
 augroup END
 
 set diffopt+=context:1
@@ -65,25 +65,25 @@ au QuickFixCmdPost [^l]* cwindow
 ]])
 
 -- Special mapping for gx that allows shell commands sh://echo Hello from Neovim!
-vim.keymap.set('n', 'gx', function()
-    local line = vim.api.nvim_get_current_line()
-    local cmd = line:match('sh://(.*)')
-    if cmd then
-        vim.cmd('!' .. cmd)
-    else
-        -- fallback: open URLs or files like usual
-        local fallback = vim.fn.expand('<cfile>')
-        vim.cmd('!xdg-open ' .. fallback)
-    end
+vim.keymap.set("n", "gx", function()
+	local line = vim.api.nvim_get_current_line()
+	local cmd = line:match("sh://(.*)")
+	if cmd then
+		vim.cmd("!" .. cmd)
+	else
+		-- fallback: open URLs or files like usual
+		local fallback = vim.fn.expand("<cfile>")
+		vim.cmd("!xdg-open " .. fallback)
+	end
 end, { noremap = true, silent = true })
 
 -- Jira writing mode (enable)
 -- Jira writing mode (enable recommended settings for drafting text)
 vim.keymap.set("n", "<leader>jw", function()
-    vim.opt.wrap = true
-    vim.opt.linebreak = true
-    vim.opt.breakindent = true
-    vim.opt.textwidth = 0
-    vim.opt.formatoptions:remove("t")
-    print("Jira writing mode enabled")
+	vim.opt.wrap = true
+	vim.opt.linebreak = true
+	vim.opt.breakindent = true
+	vim.opt.textwidth = 0
+	vim.opt.formatoptions:remove("t")
+	print("Jira writing mode enabled")
 end, { desc = "Enable Jira writing mode" })

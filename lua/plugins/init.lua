@@ -1,6 +1,87 @@
 return {
 	"tpope/vim-fugitive",
 
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		lazy = false,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+	},
+
+	{
+		"MeanderingProgrammer/treesitter-modules.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = {
+			ensure_installed = { "yaml", "go", "python", "lua", "bash" },
+			fold = { enable = true },
+			highlight = { enable = true },
+			indent = { enable = true },
+			incremental_selection = { enable = true },
+		},
+		config = function()
+			local ts = require("treesitter-modules")
+			ts.setup({
+				highlight = { enable = true },
+			})
+			vim.keymap.set("n", "<Enter>", ts.init_selection)
+			vim.keymap.set("x", "<Enter>", ts.node_incremental)
+			vim.keymap.set("x", "<BS>", ts.node_decremental)
+		end,
+	},
+	{
+		"nvim-treesitter-textobjects",
+		config = function()
+			require("nvim-treesitter-textobjects").setup({
+				select = {
+					-- Automatically jump forward to textobj, similar to targets.vim
+					lookahead = true,
+					-- You can choose the select mode (default is charwise 'v')
+					--
+					-- Can also be a function which gets passed a table with the keys
+					-- * query_string: eg '@function.inner'
+					-- * method: eg 'v' or 'o'
+					-- and should return the mode ('v', 'V', or '<c-v>') or a table
+					-- mapping query_strings to modes.
+					selection_modes = {
+						["@parameter.outer"] = "v", -- charwise
+						["@function.outer"] = "V", -- linewise
+						["@class.outer"] = "<c-v>", -- blockwise
+					},
+					-- If you set this to `true` (default is `false`) then any textobject is
+					-- extended to include preceding or succeeding whitespace. Succeeding
+					-- whitespace has priority in order to act similarly to eg the built-in
+					-- `ap`.
+					--
+					-- Can also be a function which gets passed a table with the keys
+					-- * query_string: eg '@function.inner'
+					-- * selection_mode: eg 'v'
+					-- and should return true of false
+					include_surrounding_whitespace = false,
+				},
+			})
+
+			-- keymaps
+			-- You can use the capture groups defined in `textobjects.scm`
+			vim.keymap.set({ "x", "o" }, "af", function()
+				require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "x", "o" }, "if", function()
+				require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+			end)
+			vim.keymap.set({ "x", "o" }, "ac", function()
+				require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "x", "o" }, "ic", function()
+				require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+			end)
+			-- You can also use captures from other query groups like `locals.scm`
+			vim.keymap.set({ "x", "o" }, "as", function()
+				require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
+			end)
+		end,
+	},
 	{ "fladson/vim-kitty", enabled = not _G.is_windows },
 
 	{ "rmagatti/auto-session", opts = {}, enabled = not _G.is_windows },
@@ -34,6 +115,11 @@ return {
 
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-emoji",
+		},
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup({
@@ -42,21 +128,13 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<Tab>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "emoji" },
 				}),
-			})
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			require("lspconfig").pyright.setup({
-				capabilities = capabilities,
-			})
-			require("lspconfig").html.setup({
-				capabilities = capabilities,
-				filetypes = { "html", "templ", "javascriptreact", "typescriptreact" },
 			})
 		end,
 	},
@@ -278,5 +356,44 @@ return {
 			})
 		end,
 	},
-	-- { "cjparsons74/eof-eol-marker.vim", config = function() require("eof-marker").setup() end },
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			mode = "diagnostics", -- default mode
+			auto_close = true, -- close trouble when last diagnostic is fixed
+		},
+		keys = {
+			{
+				"<leader>lt",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>lT",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>lu",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>lv",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references (Trouble)",
+			},
+			{
+				"<leader>lu",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>lU",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	},
 }

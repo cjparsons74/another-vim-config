@@ -1,7 +1,7 @@
 return {
-    "cjparsons74/todo.txt-vim",
-    config = function()
-        vim.cmd([[
+	"cjparsons74/todo.txt-vim",
+	config = function()
+		vim.cmd([[
 let g:TodoTxtStripDoneItemPriority=1
 let g:Todo_txt_prefix_creation_date=1
 
@@ -17,8 +17,8 @@ augroup todo_filetype
 
         au! BufWritePost ~/Todo/todo.txt !$HOME/Todo/todo.sh jira
         "au! BufWritePost ~/todo.txt !~/Todo/todo.sh
-    ab ~d ~/Documents/<C-r>=strftime("%F%-H%I%M")<CR>.txt
+    ab ~d ~/Documents/<C-r>=strftime("%F%-H%I%M")<CR>.md
 augroup END
 ]])
-    end,
+	end,
 }
