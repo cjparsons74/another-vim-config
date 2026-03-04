@@ -9,12 +9,12 @@ return {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
 	},
-
 	{
 		"MeanderingProgrammer/treesitter-modules.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		enabled = not (_G.is_mac or _G.is_windows),
 		opts = {
-			ensure_installed = { "yaml", "go", "python", "lua", "bash" },
+			ensure_installed = { "go", "yaml", "python", "lua", "bash" },
 			fold = { enable = true },
 			highlight = { enable = true },
 			indent = { enable = true },
@@ -25,7 +25,7 @@ return {
 			ts.setup({
 				highlight = { enable = true },
 			})
-			vim.keymap.set("n", "<Enter>", ts.init_selection)
+			vim.keymap.set("n", "<Leader><Enter>", ts.init_selection)
 			vim.keymap.set("x", "<Enter>", ts.node_incremental)
 			vim.keymap.set("x", "<BS>", ts.node_decremental)
 		end,

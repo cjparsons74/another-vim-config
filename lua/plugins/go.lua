@@ -1,5 +1,6 @@
 return {
 	"ray-x/go.nvim",
+	enabled = not (_G.is_mac or _G.is_windows),
 	dependencies = { -- optional packages
 		"ray-x/guihua.lua",
 	},

@@ -2,6 +2,7 @@ vim.opt.runtimepath:prepend(vim.fn.stdpath("data") .. "/site")
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 _G.is_windows = vim.loop.os_uname().version:find("Windows") ~= nil
+_G.is_mac = vim.loop.os_uname().sysname == "Darwin"
 local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
 
 -- Prepend Mason's bin to the PATH within Neovim only
