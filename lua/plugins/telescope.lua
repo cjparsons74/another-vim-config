@@ -23,6 +23,7 @@ return {
 		if not is_windows then
 			require("telescope").load_extension("fzf")
 		end
+		require("telescope").load_extension("luasnip")
 	end,
 	keys = {
 		{

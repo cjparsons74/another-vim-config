@@ -112,6 +112,7 @@ return {
 	{
 		"hrsh7th/cmp-nvim-lsp",
 	},
+	{ "ray-x/cmp-treesitter", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 
 	{
 		"hrsh7th/nvim-cmp",
@@ -119,22 +120,49 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-emoji",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
 		},
 		config = function()
 			local cmp = require("cmp")
+			local luasnip = require("luasnip")
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<Tab>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.expand_or_locally_jumpable() then
+							luasnip.expand_or_jump()
+						else
+							fallback() -- This is the magic "pass-through" to Neovim
+						end
+					end, { "i", "s" }), -- Must include 's' for snippet/select mode!
+
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif luasnip.locally_jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "buffer" },
+					{ name = "treesitter" },
 					{ name = "emoji" },
+					{ name = "luasnip" },
 				}),
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body) -- This is the crucial line
+					end,
+				},
 			})
 		end,
 	},
