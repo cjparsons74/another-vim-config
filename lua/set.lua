@@ -41,6 +41,11 @@ vim.opt.updatetime = 50
 
 vim.opt.shada = "!,'5000,<500,s10,h"
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- start with all folds open
+vim.opt.foldlevel = 99
+
 -- Prevent passing mouse to vim when ssh
 vim.opt.mouse = ""
 
@@ -87,3 +92,18 @@ vim.keymap.set("n", "<leader>jw", function()
 	vim.opt.formatoptions:remove("t")
 	print("Jira writing mode enabled")
 end, { desc = "Enable Jira writing mode" })
+
+-- Don't show inlay hints by default
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local bufnr = args.buf
+
+		-- Disable Inlay Hints globally for this buffer
+		vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+
+		-- Optional: Create a keymap to toggle them on the fly if you ever need them
+		vim.keymap.set("n", "<leader>lh", function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		end, { buffer = bufnr, desc = "Toggle inlay [h]ints" })
+	end,
+})
