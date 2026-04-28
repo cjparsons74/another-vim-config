@@ -18,6 +18,7 @@ return {
 		formatters_by_ft = {
 			sh = { "shfmt" },
 			html = { "djlint" },
+			json = { "fixjson" },
 			lua = { "stylua" },
 			python = { "ruff_fix", "ruff_organize_imports", "ruff_format" },
 			terraform = { "terraform_fmt" },

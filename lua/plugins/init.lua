@@ -14,7 +14,7 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		enabled = not (_G.is_mac or _G.is_windows),
 		opts = {
-			ensure_installed = { "go", "yaml", "python", "lua", "bash" },
+			ensure_installed = { "go", "yaml", "python", "lua", "bash", "json" },
 			fold = { enable = true },
 			highlight = { enable = true },
 			indent = { enable = true },
@@ -368,6 +368,7 @@ return {
 				html = { "djlint" },
 				django = { "djlint" },
 				jinja = { "djlint" },
+				json = { "jsonlint" },
 			}
 			lint.linters.djlint.args = {
 				"--lint",

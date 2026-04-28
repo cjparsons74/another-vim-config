@@ -20,6 +20,11 @@ return {
 				border = "curved", -- 'single' | 'double' | 'shadow' | 'curved'
 				winblend = 3,
 			},
+			on_open = function(term)
+				vim.cmd("setlocal nospell")
+				-- Optional: Also disable line numbers in the terminal for a cleaner look
+				vim.cmd("setlocal nonumber norelativenumber")
+			end,
 		})
 
 		-- 2. Modern Keymaps for Terminal Mode

@@ -49,6 +49,14 @@ vim.opt.foldlevel = 99
 -- Prevent passing mouse to vim when ssh
 vim.opt.mouse = ""
 
+vim.filetype.add({
+	extension = {
+		tf = "terraform",
+		tfvars = "terraform",
+		hcl = "terraform",
+	},
+})
+
 -- Don't need "Insert" in below airline because airline has it
 vim.opt.showmode = false
 vim.cmd([[

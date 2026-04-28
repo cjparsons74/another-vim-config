@@ -32,6 +32,7 @@ return {
 			bashls = { capabilities = capabilities },
 			terraformls = { capabilities = capabilities },
 			quick_lint_js = { capabilities = capabilities },
+			jsonls = { capabilities = capabilities },
 		}
 
 		-- 3. Register and Enable (The 0.11 Core way)
