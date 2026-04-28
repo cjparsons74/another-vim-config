@@ -35,11 +35,11 @@ return {
     <center style="width: 100%; background-color: #faf6f1">
         <div style="display: none; max-height: 0px; overflow: hidden;">{}</div>
         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: auto">
-            <tr>
+            <tr> <!-- banner -->
                 <td><img src="https://www.bethesdachildren.org/static/newsletter/Header600.png" width="600" style="width: 100%; height: auto"></td>
             </tr>
             <!-- content here -->
-            <tr>
+            <tr> <!-- footer -->
                 <td align="center"
                     style="background-color: #ffffff;
                            padding: 20px 0;
@@ -143,7 +143,7 @@ return {
 					"news-third-img-txt",
 					fmt(
 						[[
-                <tr>
+                <tr> <!-- 1/3 image + text -->
                     <td style="padding: 10px; background-color: #ffffff; text-align: center; font-size: 0">
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 350px; display: inline-block; vertical-align: middle; text-align: left">
                             <tr>
@@ -171,7 +171,7 @@ return {
 					"news-half-img-txt",
 					fmt(
 						[[
-                    <tr>
+                    <tr> <!-- news-half-img-txt -->
                     <td style="padding: 10px;
                                background-color: #ffffff;
                                text-align: center;
@@ -228,7 +228,7 @@ return {
 					"news-txt",
 					fmt(
 						[[
-                <tr>
+                <tr> <!-- news-txt -->
                     <td style="padding: 15px 30px; font-family: Nunito, sans-serif; background-color: #ffffff;">
                         <h4>{}</h4>
                         <p>{}</p>
@@ -241,10 +241,10 @@ return {
 
 				-- 4. GREEN CTA BOX
 				s(
-					"news-cta",
+					"news-cta--green",
 					fmt(
 						[[
-                <tr>
+                <tr> <!-- news-cta-green -->
                 <td style="padding: 0 20px; background-color: #ffffff;">
                     <table width="100%"
                            style="background-color: #22c55e;
@@ -268,7 +268,7 @@ return {
 					"news-video",
 					fmt(
 						[[
-            <tr>
+            <tr> <!-- news-video -->
                 <td style="padding: 15px 30px;
                            font-family: Nunito, sans-serif;
                            background-color: #ffffff;
@@ -296,7 +296,7 @@ return {
 					"news-signoff",
 					fmt(
 						[[
-                    <tr>
+                    <tr> <!-- news-signoff -->
                     <td style="padding: 15px 30px;
                                font-family: Nunito, sans-serif;
                                background-color: #ffffff">
@@ -317,12 +317,45 @@ return {
 						{ i(1, "p1"), i(2, "p2") }
 					)
 				),
+				s(
+					"news-dear-block-no-pic",
+					fmt(
+						[[ 
+                        <tr> <!-- news-dear-block-no-pic -->
+							<td style="padding: 15px 30px;
+									   font-family: Nunito, sans-serif;
+									   background-color: #ffffff">
+								<h4>Dear supporters</h4>
+								<p>
+                                   {}
+								</p>
+							</td>
+						</tr>
+                    ]],
+						{
+							i(1, "fill-in"),
+						}
+					)
+				),
+				-- Template for copying
+				s(
+					"news-empty",
+					fmt(
+						[[ 
+                        <tr>
+                        <td>{}</td></tr>
+                    ]],
+						{
+							i(1, "fill-in"),
+						}
+					)
+				),
 				-- Two pictures with captions
 				s(
 					"news-two-pictures-captions",
 					fmt(
 						[[
-                    <tr>
+                    <tr> <!-- news-two-pictures-captions -->
                     <td style="padding: 0px;
                                background-color: #ffffff;
                                text-align: center;
