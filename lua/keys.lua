@@ -23,7 +23,8 @@ vim.keymap.set("n", "<Leader>e", function()
 end, { desc = "Open MiniFiles at current file or cwd" })
 
 vim.keymap.set("n", "<Leader>qq", ":wqa<CR>", { desc = "Write and quit" })
-vim.keymap.set("n", "<Leader>qq", ":wqa<CR>", { desc = "Write and quit" })
+vim.keymap.set("n", "<Leader>fz", ":Zi<CR>", { desc = "Cd to favourite directory" })
+
 vim.keymap.set("n", "<Leader>fx", function()
 	-- Get the directory containing your init.lua/init.vim
 	local config_dir = vim.fn.fnamemodify(vim.env.MYVIMRC, ":h")
@@ -53,6 +54,9 @@ map("n", "<leader>sf", "<Plug>(nvim-surround-find)", {
 map("n", "<leader>sh", "<Plug>(nvim-surround-highlight)", {
 	desc = "Highlight surround",
 })
+
+-- Just use s in visual mode (no conflict with flash.nvim)
+map("x", "s", "<Plug>(nvim-surround-visual)", { desc = "Add surround" })
 
 vim.keymap.set("n", "<leader>si", function()
 	vim.cmd("normal! vib")

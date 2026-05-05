@@ -4,7 +4,7 @@ return {
 	config = function()
 		require("toggleterm").setup({
 			-- size can be a number or function which is passed the current terminal
-			size = 20,
+			size = 25,
 			open_mapping = [[<c-T>]], -- This toggles the terminal
 			hide_numbers = true,
 			shade_terminals = true,
@@ -24,6 +24,7 @@ return {
 				vim.cmd("setlocal nospell")
 				-- Optional: Also disable line numbers in the terminal for a cleaner look
 				vim.cmd("setlocal nonumber norelativenumber")
+				vim.cmd("setlocal nowinfixheight")
 			end,
 		})
 
