@@ -1,4 +1,3 @@
-vim.opt.runtimepath:prepend(vim.fn.stdpath("data") .. "/site")
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 _G.is_windows = vim.loop.os_uname().version:find("Windows") ~= nil
@@ -14,7 +13,11 @@ end
 
 require("lazy_bootstrap")
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+	rocks = {
+		enabled = false,
+	},
+})
 require("lsp")
 require("keys")
 require("set")

@@ -9,28 +9,40 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 		-- 2. Define your server configs in one table
+		-- 2. Define your server configs in one table
 		local servers = {
 			pyright = {
 				capabilities = capabilities,
-				root_dir = vim.fs.root(0, { ".git", "pyproject.toml", "setup.py", "pyrightconfig.json" }),
-				-- settings = {
-				-- 	pyright = { disableOrganizeImports = true },
-				-- 	python = {
-				-- 		analysis = {
-				-- 			autoImportCompletions = true,
-				-- 			typeCheckingMode = "basic", -- Optional: adjust as needed
-				-- 		},
-				-- 	},
-				-- },
+				-- Modern Nvim 0.11/0.12 signature: (bufnr, on_dir)
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					local root = vim.fs.root(fname, { "pyproject.toml", "setup.py", "pyrightconfig.json", ".git" })
+					if root then
+						on_dir(root)
+					end
+				end,
 			},
 			html = {
 				capabilities = capabilities,
 				filetypes = { "html", "templ", "javascriptreact", "typescriptreact" },
 			},
-			-- gopls = { capabilities = capabilities },
 			lua_ls = { capabilities = capabilities },
 			bashls = { capabilities = capabilities },
-			terraformls = { capabilities = capabilities },
+			clangd = { capabilities = capabilities },
+			yamlls = { capabilities = capabilities },
+
+			terraformls = {
+				capabilities = capabilities,
+				-- Strictly search for local project anchors so it NEVER jumps to monorepo root
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					local root = vim.fs.root(fname, { ".terraform", ".terraform.lock.hcl", "main.tf", "variables.tf" })
+					if root then
+						on_dir(root)
+					end
+				end,
+			},
+
 			quick_lint_js = { capabilities = capabilities },
 			jsonls = { capabilities = capabilities },
 		}

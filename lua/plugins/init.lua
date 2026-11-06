@@ -235,11 +235,11 @@ return {
 	--     },
 	-- },
 	-- {
-	--     dir = "~/Documents/eof-eol-marker.vim",
-	--     name = "eof-marker",
-	--     config = function()
-	--         require('eof-marker').setup()
-	--     end
+	-- 	"cjparsons74/eof-eol-marker.vim",
+	-- 	name = "eof-marker",
+	-- 	config = function()
+	-- 		require("eof-marker").setup()
+	-- 	end,
 	-- },
 	{
 		"cuducos/yaml.nvim",
@@ -261,7 +261,7 @@ return {
 				"<Leader>yy",
 				mode = { "n" },
 				function()
-					YAML_PLUGIN.yank_all("+")
+					YAML_PLUGIN.yank("+")
 				end,
 				desc = "Key & value to +",
 			},

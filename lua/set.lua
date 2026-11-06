@@ -46,6 +46,16 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- start with all folds open
 vim.opt.foldlevel = 99
 
+function _G.my_foldtext()
+	local line = vim.fn.getline(vim.v.foldstart)
+	local count = vim.v.foldend - vim.v.foldstart + 1
+	return {
+		{ line, "Normal" },
+		{ ("  ··· %d lines"):format(count), "Comment" },
+	}
+end
+vim.opt.foldtext = "v:lua.my_foldtext()"
+
 -- Prevent passing mouse to vim when ssh
 vim.opt.mouse = ""
 
@@ -90,7 +100,18 @@ vim.keymap.set("n", "gx", function()
 	end
 end, { noremap = true, silent = true })
 
--- Jira writing mode (enable)
+-- Asciidoc / markdown mode
+vim.keymap.set("n", "<leader>jm", function()
+	vim.opt.wrap = true
+	vim.opt.linebreak = true
+	vim.opt.breakindent = true
+	vim.opt.textwidth = 100
+	pcall(function()
+		require("cmp").setup.buffer({ completion = { autocomplete = false } })
+	end)
+	print("Doc writing mode enabled")
+end, { desc = "Enable doc writing mode" })
+
 -- Jira writing mode (enable recommended settings for drafting text)
 vim.keymap.set("n", "<leader>jw", function()
 	vim.opt.wrap = true
@@ -98,6 +119,9 @@ vim.keymap.set("n", "<leader>jw", function()
 	vim.opt.breakindent = true
 	vim.opt.textwidth = 0
 	vim.opt.formatoptions:remove("t")
+	pcall(function()
+		require("cmp").setup.buffer({ completion = { autocomplete = false } })
+	end)
 	print("Jira writing mode enabled")
 end, { desc = "Enable Jira writing mode" })
 
@@ -115,3 +139,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, { buffer = bufnr, desc = "Toggle inlay [h]ints" })
 	end,
 })
+
+-- Keep buffer-local options/mappings when restoring sessions
+vim.opt.sessionoptions:append("localoptions")
+
+-- Disable unused remote plugin providers
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
