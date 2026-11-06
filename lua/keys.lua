@@ -95,3 +95,26 @@ map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
+
+wk.add({
+	{ "<leader>g", group = "Git" },
+})
+
+vim.keymap.set("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Git status (fugitive)" })
+
+vim.keymap.set("n", "<leader>gt", function()
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].modified then
+			local name = vim.api.nvim_buf_get_name(buf)
+			vim.notify("Unsaved changes in " .. (name ~= "" and name or "[No Name]") .. "; not opening diffview", vim.log.levels.ERROR)
+			return
+		end
+	end
+	-- Diffview always opens in its own tabpage, so only its windows are visible
+	vim.cmd("DiffviewOpen")
+end, { desc = "Diffview (difftool)" })
+
+vim.keymap.set("n", "<leader>gc", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview (back to previous tab)" })
+
+vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Git blame (fugitive)" })
+vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File history (Diffview)" })
