@@ -292,6 +292,7 @@ return {
 	},
 	{
 		"sindrets/diffview.nvim",
+		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory", "DiffviewToggleFiles", "DiffviewFocusFiles" },
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("diffview").setup({
@@ -305,6 +306,10 @@ return {
 				view = {
 					default = {
 						winbar_info = true, -- This adds the branch/commit info to the top of each window
+					},
+					merge_tool = {
+						layout = "diff3_mixed",
+						disable_diagnostics = true,
 					},
 				},
 				hooks = {
