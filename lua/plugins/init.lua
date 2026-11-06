@@ -296,6 +296,12 @@ return {
 		config = function()
 			require("diffview").setup({
 				enhanced_diff_hl = true,
+				keymaps = {
+					file_panel = {
+						{ "n", "cc", "<Cmd>Git commit<CR>", { desc = "Commit (fugitive)" } },
+						{ "n", "ca", "<Cmd>Git commit --amend<CR>", { desc = "Amend (fugitive)" } },
+					},
+				},
 				view = {
 					default = {
 						winbar_info = true, -- This adds the branch/commit info to the top of each window
