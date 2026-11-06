@@ -147,3 +147,18 @@ vim.opt.sessionoptions:append("localoptions")
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+--
+-- Special replace for newsletters
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*newsletter*.html",
+	callback = function()
+		-- Save the current cursor position so it doesn't jump
+		local save_cursor = vim.fn.getpos(".")
+
+		-- Replace <p> with <p style="margin: 0;"> globally in the file
+		vim.cmd([[%s/<p>/<p style="margin: 0 0 10px 0;">/ge]])
+
+		-- Restore the cursor position
+		vim.fn.setpos(".", save_cursor)
+	end,
+})

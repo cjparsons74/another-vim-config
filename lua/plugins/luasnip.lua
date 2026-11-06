@@ -282,13 +282,13 @@ return {
                                  src="https://www.bethesdachildren.org/static/newsletter/{}"
                                  style="display: block;
                                         margin: 0 auto;
-                                        border: 0">
+                                        border: 10 0">
                         </a>
                     </p>
                 </td>
             </tr>
                     ]],
-						{ i(1, "alt"), i(2, "filename") }
+						{ i(1, "thumb"), i(2, "filename") }
 					)
 				),
 				-- Signoff
